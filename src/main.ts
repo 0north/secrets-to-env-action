@@ -10,13 +10,22 @@ let excludeList = [
   'github_token'
 ]
 
+function tf_case(s : string) {
+  if (s.substring(0, 7) == "TF_VAR_") {
+    return s.substring(0, 7) + s.substring(7).toLowerCase();
+  } else {
+    return s;
+  }
+}
+
 const convertTypes: Record<string, (s: string) => string> = {
   lower: s => s.toLowerCase(),
   upper: s => s.toUpperCase(),
   camel: camelCase,
   constant: constantCase,
   pascal: pascalCase,
-  snake: snakeCase
+  snake: snakeCase,
+  tf_case: s => tf_case(s)
 }
 
 async function run(): Promise<void> {

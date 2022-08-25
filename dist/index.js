@@ -48,13 +48,23 @@ let excludeList = [
     // this variable is already exported automatically
     'github_token'
 ];
+function tf_case(s) {
+    core.info("s: " + s + " " + s.substring(0, 6));
+    if (s.substring(0, 7) == "TF_VAR_") {
+        return s.substring(0, 7) + s.substring(7).toLowerCase();
+    }
+    else {
+        return s;
+    }
+}
 const convertTypes = {
     lower: s => s.toLowerCase(),
     upper: s => s.toUpperCase(),
     camel: camel_case_1.camelCase,
     constant: constant_case_1.constantCase,
     pascal: pascal_case_1.pascalCase,
-    snake: snake_case_1.snakeCase
+    snake: snake_case_1.snakeCase,
+    tf_case: s => tf_case(s)
 };
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -66,6 +76,9 @@ function run() {
             const includeListStr = core.getInput('include');
             const excludeListStr = core.getInput('exclude');
             const convert = core.getInput('convert');
+            core.info("What is this!");
+            core.info("Convert: " + convert);
+            core.info("What is this!" + secretsJson);
             let secrets;
             try {
                 secrets = JSON.parse(secretsJson);
