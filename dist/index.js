@@ -49,7 +49,6 @@ let excludeList = [
     'github_token'
 ];
 function tf_case(s) {
-    core.info("s: " + s + " " + s.substring(0, 6));
     if (s.substring(0, 7) == "TF_VAR_") {
         return s.substring(0, 7) + s.substring(7).toLowerCase();
     }
@@ -76,9 +75,6 @@ function run() {
             const includeListStr = core.getInput('include');
             const excludeListStr = core.getInput('exclude');
             const convert = core.getInput('convert');
-            core.info("What is this!");
-            core.info("Convert: " + convert);
-            core.info("What is this!" + secretsJson);
             let secrets;
             try {
                 secrets = JSON.parse(secretsJson);
