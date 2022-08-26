@@ -114,7 +114,7 @@ steps:
 **Convert:**
 
 Converts all exported secrets according to a [template](https://github.com/blakeembrey/change-case#core).
-Available: `lower, upper, camel, constant, pascal, snake`.
+Available: `lower, upper, camel, constant, pascal, snake, tf_case`.
   
 ```yaml
 steps:
@@ -125,6 +125,13 @@ steps:
     convert: lower
 - run: echo "Value of my_secret: $my_secret"
 ```
+
+**Special note on the tf_case conversion:** 
+This conversion is intended for exposing environment variables for setting Terraform variables in the special (annoying) casing of `TF_VAR_<variable_name>`. 
+
+Example: A secret called `TF_VAR_SOME_TF_VARIABLE` will be converted to `TF_VAR_some_tf_variable`.
+
+Only the ones starting with `TF_VAR_` will be modified.
 
 ## How it works
 
