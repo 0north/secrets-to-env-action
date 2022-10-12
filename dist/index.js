@@ -49,7 +49,7 @@ let excludeList = [
     'github_token'
 ];
 function tf_case(s) {
-    if (s.substring(0, 7) == 'TF_VAR_') {
+    if (s.startsWith('TF_VAR_')) {
         return s.substring(0, 7) + s.substring(7).toLowerCase();
     }
     else {

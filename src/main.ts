@@ -10,8 +10,8 @@ let excludeList = [
   'github_token'
 ]
 
-function tf_case(s: string) {
-  if (s.substring(0, 7) == 'TF_VAR_') {
+function tf_case(s: string): string {
+  if (s.startsWith('TF_VAR_')) {
     return s.substring(0, 7) + s.substring(7).toLowerCase()
   } else {
     return s
