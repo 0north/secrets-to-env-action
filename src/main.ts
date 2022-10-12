@@ -10,11 +10,11 @@ let excludeList = [
   'github_token'
 ]
 
-function tf_case(s : string) {
-  if (s.substring(0, 7) == "TF_VAR_") {
-    return s.substring(0, 7) + s.substring(7).toLowerCase();
+function tf_case(s: string): string {
+  if (s.startsWith('TF_VAR_')) {
+    return s.substring(0, 7) + s.substring(7).toLowerCase()
   } else {
-    return s;
+    return s
   }
 }
 
@@ -84,10 +84,6 @@ with:
           )
         }
         newKey = convertTypes[convert](newKey)
-      }
-
-      if (process.env[newKey]) {
-        core.warning(`Will re-write "${newKey}" environment variable.`)
       }
 
       core.exportVariable(newKey, secrets[key])
